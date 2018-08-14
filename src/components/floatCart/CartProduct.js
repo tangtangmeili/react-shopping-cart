@@ -5,7 +5,6 @@ import Thumb from "./../Thumb";
 
 import util from '../../util';
 
-
 class CartProduct extends Component {
 
   state = {
@@ -19,10 +18,9 @@ class CartProduct extends Component {
   handleMouseOut = () => {
     this.setState({isMouseOver: false});
   }
-
-
+ 
   render(){
-    const { product, removeProduct } = this.props;
+    const { product, removeProduct,addQuantity,minusQuantity } = this.props;
 
     const classes = ['shelf-item'];
 
@@ -47,11 +45,21 @@ class CartProduct extends Component {
           <p className="title">{product.title}</p>
           <p className="desc">
             {`${product.availableSizes[0]} | ${product.style}`} <br />
-            Quantity: {product.quantity}
           </p>
+          <dl className="quantity">
+            <dt className="q-title">Quantity</dt>
+            <dd>
+              <span className="q-stock">
+                <a className="q-reduce" title="minus1" onClick={()=>minusQuantity(product)}>-</a>
+                <input type="text" className="q-text" title="Please input the quantity"  value={(product.quantity)}/>
+                <a className="q-add" title="add1" onClick={()=>addQuantity(product)}>+</a>
+              </span>
+            </dd>
+        </dl> 
+         
         </div>
         <div className="shelf-item__price">
-          <p>{`${product.currencyFormat}  ${util.formatPrice(product.price)}`}</p>
+          <p>{`${product.currencyFormat}  ${util.formatPrice(product.price*product.quantity)}`}</p>
         </div>
 
         <div className="clearfix" />

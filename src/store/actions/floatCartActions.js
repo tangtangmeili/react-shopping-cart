@@ -1,4 +1,4 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT } from './types';
+import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT,ADD_QUANTITY,MINUS_QUANTITY } from './types';
 
 
 export const loadCart = (cartProducts) => dispatch => {
@@ -20,4 +20,20 @@ export const removeProduct = (productData) => dispatch => {
     type: REMOVE_PRODUCT,
     payload: productData,
   });
+}
+
+export const addQuantity=(cartProduct)=>dispatch=>{
+  cartProduct.quantity++;
+  dispatch({
+    type:ADD_QUANTITY,
+    payload:cartProduct,
+  })
+}
+
+export const minusQuantity=(cartProduct)=>dispatch=>{
+  cartProduct.quantity=(cartProduct.quantity>1) ? (cartProduct.quantity-1):1;
+  dispatch({
+    type:MINUS_QUANTITY,
+    payload:cartProduct
+  })
 }

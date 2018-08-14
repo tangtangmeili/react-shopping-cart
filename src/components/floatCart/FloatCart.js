@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { loadCart, removeProduct } from '../../store/actions/floatCartActions';
+import { loadCart, removeProduct,addQuantity,minusQuantity } from '../../store/actions/floatCartActions';
 import { updateCart } from '../../store/actions/updateCartActions';
 
 import CartProduct from './CartProduct';
@@ -36,6 +36,10 @@ class FloatCart extends Component {
     if (nextProps.productToRemove !== this.props.productToRemove) {
       this.removeProduct(nextProps.productToRemove);
     }
+
+    if(nextProps.itemQuantity !==this.props.itemQuantity){
+     this.manageQuantity(nextProps.addQuantity);
+    }
   }
 
   openFloatCart = () => {
@@ -52,12 +56,12 @@ class FloatCart extends Component {
 
     cartProducts.forEach(cp => {
       if (cp.id === product.id) {
-        cp.quantity += product.quantity;
         productAlreadyInCart = true;
       }
     });
 
     if (!productAlreadyInCart) {
+      product.quantity=1;
       cartProducts.push(product);
     }
 
@@ -75,6 +79,12 @@ class FloatCart extends Component {
     }
   }
 
+  manageQuantity=(product)=>{
+    const {cartProducts,updateCart}=this.props;
+    Object.assign({...cartProducts,product});
+    updateCart(cartProducts);
+  }
+
   proceedToCheckout = () => {
     const { totalPrice, productQuantity, currencyFormat, currencyId } = this.props.cartTotals;
 
@@ -86,13 +96,15 @@ class FloatCart extends Component {
   }
 
   render() {
-    const { cartTotals, cartProducts, removeProduct } = this.props;
+    const { cartTotals, cartProducts, removeProduct,addQuantity,minusQuantity } = this.props;
 
     const products = cartProducts.map(p => {
       return (
         <CartProduct
           product={p}
           removeProduct={removeProduct}
+          addQuantity={addQuantity}
+          minusQuantity={minusQuantity}
           key={p.id}
         />
       );
@@ -155,7 +167,7 @@ class FloatCart extends Component {
                 {!!cartTotals.installments && (
                   <span>
                     {`OR UP TO ${cartTotals.installments} x ${cartTotals.currencyFormat} ${util.formatPrice(cartTotals.totalPrice / cartTotals.installments, cartTotals.currencyId)}`}
-                  </span>
+    +              </span>
                 )}
               </small>
             </div>
@@ -176,14 +188,17 @@ FloatCart.propTypes = {
   newProduct: PropTypes.object,
   removeProduct: PropTypes.func,
   productToRemove: PropTypes.object,
+  addQuantity:PropTypes.func,
+  minusQuantity:PropTypes.func
 };
 
 const mapStateToProps = state => ({
   cartProducts: state.cartProducts.items,
   newProduct: state.cartProducts.item,
   productToRemove: state.cartProducts.itemToRemove,
+  itemQuantity: state.cartProducts.itemToChange,
   cartTotals: state.cartTotals.item,
 });
 
-export default connect(mapStateToProps, { loadCart, updateCart, removeProduct})(FloatCart);
+export default connect(mapStateToProps, { loadCart, updateCart, removeProduct,addQuantity,minusQuantity})(FloatCart);
 

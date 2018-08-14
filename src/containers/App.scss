@@ -442,6 +442,42 @@ footer {
                 text-align: right;
                 width: 25%;
             }
+            & .quantity{
+                color:#ececec;
+                dt,dd,span,input,a{
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                dd{
+                    -webkit-margin-start:20px;
+                }
+                a{
+                    margin:0;
+                    padding:0;
+                    width: 26px;
+                    height: 26px;
+                    border:1px solid #ccc;
+                    line-height: 26px;
+                    padding:0;
+                    text-align: center;
+                    background-color: #ededed;
+                    overflow: hidden;
+                    color:#333;
+                    font-size: 34px;
+                    vertical-align: top;
+                    cursor: pointer;
+                }
+                input{
+                    margin:0;
+                    padding:0;
+                    width: 48px;
+                    height: 26px;
+                    line-height: 26px;
+                    text-align: center;
+                    border:1px solid #ccc;
+                    outline: 0;
+                }
+            }
         }
     }
 
