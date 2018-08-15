@@ -5,12 +5,16 @@ import Thumb from "./../Thumb";
 
 import util from '../../util';
 
+
 class CartProduct extends Component {
-
-  state = {
-    isMouseOver: false,
+  constructor(props,context){
+    super(props,context);
+    this.state={
+      isMouseOver: false,
+      isToDisable:((this.props.product.quantity>1) ? false:true)
+    }
   }
-
+ 
   handleMouseOver = () => {
     this.setState({isMouseOver: true});
   }
@@ -18,7 +22,11 @@ class CartProduct extends Component {
   handleMouseOut = () => {
     this.setState({isMouseOver: false});
   }
- 
+  componentWillReceiveProps(nextProps){
+    console.log("今日頭條");
+    this.setState({isToDisable:((this.props.product.quantity>1) ? false:true)})
+  }
+   
   render(){
     const { product, removeProduct,addQuantity,minusQuantity } = this.props;
 
@@ -50,7 +58,7 @@ class CartProduct extends Component {
             <dt className="q-title">Quantity</dt>
             <dd>
               <span className="q-stock">
-                <a className="q-reduce" title="minus1" onClick={()=>minusQuantity(product)}>-</a>
+                <a className={this.state.isToDisable?"q-reduce disabled":"q-reduce"} title="minus1" onClick={()=>minusQuantity(product)}>-</a>
                 <input type="text" className="q-text" title="Please input the quantity"  value={(product.quantity)}/>
                 <a className="q-add" title="add1" onClick={()=>addQuantity(product)}>+</a>
               </span>

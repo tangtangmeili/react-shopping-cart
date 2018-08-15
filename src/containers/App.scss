@@ -260,16 +260,16 @@ footer {
 .float-cart {
     position: fixed;
     top: 0;
-    right: -450px;
+   right: 0;
     width: 450px;
     height: 100%;
     background-color: $black-light;
     box-sizing: border-box;
-    
+    display: none;
     transition: right 0.2s;
 
     &--open {
-        right: 0;
+       display: block;
     }
 
     &__close-btn {
@@ -476,6 +476,11 @@ footer {
                     text-align: center;
                     border:1px solid #ccc;
                     outline: 0;
+                }
+
+                a.disabled{
+                    color:#fff;
+                    cursor: default;
                 }
             }
         }
