@@ -7,6 +7,8 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const UPDATE_CART = 'UPDATE_CART';
 export const ADD_QUANTITY='ADD_QUANTITY'; 
 export const MINUS_QUANTITY='MINUS_QUANTITY';
+export const FAVORITE='FAVORITE';
+export const UNFAVORITE="UNFAVORITE";
 // Filter
 export const UPDATE_FILTER = 'UPDATE_FILTER';
 // Sort

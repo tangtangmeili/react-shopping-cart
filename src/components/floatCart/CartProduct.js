@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-
+import {connect} from 'react-redux';
 import Thumb from "./../Thumb";
-
 import util from '../../util';
+import {favorite} from '../../store/actions/floatCartActions';
 
+const FAVORITE_CLASS='btn-fav fav';
+const UNFAVORITE_CLASS='btn-fav unfav';
 
 class CartProduct extends Component {
-  constructor(props,context){
-    super(props,context);
-    this.state={
-      isMouseOver: false,
-      isToDisable:((this.props.product.quantity>1) ? false:true)
-    }
-  }
+  state={
+    isMouseOver: false,
+    isToDisable:((this.props.product.quantity>1) ? false:true)
+  };
  
   handleMouseOver = () => {
     this.setState({isMouseOver: true});
@@ -22,13 +21,17 @@ class CartProduct extends Component {
   handleMouseOut = () => {
     this.setState({isMouseOver: false});
   }
+
+  // handleFavCount=()=>{
+  //   this.props.favorite();
+  // }
   componentWillReceiveProps(nextProps){
     console.log("今日頭條");
     this.setState({isToDisable:((this.props.product.quantity>1) ? false:true)})
   }
    
   render(){
-    const { product, removeProduct,addQuantity,minusQuantity } = this.props;
+    const { product, removeProduct,addQuantity,minusQuantity,favorite } = this.props;
 
     const classes = ['shelf-item'];
 
@@ -61,9 +64,15 @@ class CartProduct extends Component {
                 <a className={this.state.isToDisable?"q-reduce disabled":"q-reduce"} title="minus1" onClick={()=>minusQuantity(product)}>-</a>
                 <input type="text" className="q-text" title="Please input the quantity"  value={(product.quantity)}/>
                 <a className="q-add" title="add1" onClick={()=>addQuantity(product)}>+</a>
-              </span>
+              </span> 
             </dd>
-        </dl> 
+            <div className={FAVORITE_CLASS}>
+              <i className="iconfont" onClick={()=>favorite(product.id)}>&#xe654;</i>
+              <i className="iconNum">{product.favoiteNum}</i>
+            </div>
+
+          </dl>
+          
          
         </div>
         <div className="shelf-item__price">
@@ -80,6 +89,11 @@ class CartProduct extends Component {
 CartProduct.propTypes = {
   product: PropTypes.object.isRequired,
   removeProduct: PropTypes.func.isRequired,
-};
+  carProducts:PropTypes.array.isRequired
+}
 
-export default CartProduct;
+const mapStateToProps=state=>({
+  favoriteCount:state.cartProducts.favoriteCount
+});
+
+export default connect(mapStateToProps,{favorite})(CartProduct);
