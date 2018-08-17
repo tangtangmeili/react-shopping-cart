@@ -7,6 +7,8 @@ import util from '../../util';
 
 
 const Product = (props) => {
+  const FAVORITE_CLASS='btn-fav fav';
+  const UNFAVORITE_CLASS='btn-fav unfav';
   const product = props.product;
 
   // Um componente de input pode alterar a quantidade no futuro
@@ -28,9 +30,10 @@ const Product = (props) => {
 
   return (
     <div className="shelf-item" data-sku={product.sku}>
-      {product.isFreeShipping && 
-        <div className="shelf-stopper">Free shipping</div>
-      }
+       <div className="btn-fav fav">
+              <i className="iconfont">&#xe654;</i>
+              <i className="iconNum">{product.favoiteNum}</i>
+        </div>
       <Thumb
         classes="shelf-item__thumb"
         src={require(`../../static/products/${product.sku}_1.jpg`)}

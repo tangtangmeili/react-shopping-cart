@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {connect} from 'react-redux';
 import Thumb from "./../Thumb";
 import util from '../../util';
-import {favorite} from '../../store/actions/floatCartActions';
-
-const FAVORITE_CLASS='btn-fav fav';
-const UNFAVORITE_CLASS='btn-fav unfav';
 
 class CartProduct extends Component {
   state={
@@ -22,9 +17,6 @@ class CartProduct extends Component {
     this.setState({isMouseOver: false});
   }
 
-  // handleFavCount=()=>{
-  //   this.props.favorite();
-  // }
   componentWillReceiveProps(nextProps){
     console.log("今日頭條");
     this.setState({isToDisable:((this.props.product.quantity>1) ? false:true)})
@@ -66,10 +58,6 @@ class CartProduct extends Component {
                 <a className="q-add" title="add1" onClick={()=>addQuantity(product)}>+</a>
               </span> 
             </dd>
-            <div className={FAVORITE_CLASS}>
-              <i className="iconfont" onClick={()=>favorite(product.id)}>&#xe654;</i>
-              <i className="iconNum">{product.favoiteNum}</i>
-            </div>
 
           </dl>
           
@@ -89,11 +77,6 @@ class CartProduct extends Component {
 CartProduct.propTypes = {
   product: PropTypes.object.isRequired,
   removeProduct: PropTypes.func.isRequired,
-  carProducts:PropTypes.array.isRequired
 }
 
-const mapStateToProps=state=>({
-  favoriteCount:state.cartProducts.favoriteCount
-});
-
-export default connect(mapStateToProps,{favorite})(CartProduct);
+export default CartProduct;

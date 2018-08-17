@@ -176,6 +176,29 @@ footer {
       margin-top: 10px;
       cursor: pointer;
       transition: background-color 0.2s; }
+    .shelf-container .shelf-item .btn-fav {
+      float: right;
+      width: 48px;
+      height: 25px;
+      display: inline-block;
+      vertical-align: middle;
+      border: 1px solid;
+      border-radius: 10%;
+      -webkit-margin-start: 0px; }
+      .shelf-container .shelf-item .btn-fav .iconfont {
+        display: inline;
+        font-size: 26px;
+        vertical-align: middle;
+        cursor: pointer; }
+      .shelf-container .shelf-item .btn-fav .iconNum {
+        font-size: 20px;
+        vertical-align: middle;
+        font-style: normal; }
+    .shelf-container .shelf-item .btn-fav.fav {
+      color: #5cB85C; }
+    .shelf-container .shelf-item .btn-fav.unfav {
+      color: #fff;
+      background-color: #5cB85C; }
 
 .float-cart {
   position: fixed;
@@ -344,29 +367,6 @@ footer {
         .float-cart__shelf-container .shelf-item .quantity a.disabled {
           color: #fff;
           cursor: not-allowed; }
-        .float-cart__shelf-container .shelf-item .quantity .btn-fav {
-          float: right;
-          width: 48px;
-          height: 25px;
-          display: inline-block;
-          vertical-align: middle;
-          border: 1px solid;
-          border-radius: 10%;
-          -webkit-margin-start: 0px; }
-          .float-cart__shelf-container .shelf-item .quantity .btn-fav .iconfont {
-            display: inline;
-            font-size: 26px;
-            vertical-align: middle;
-            cursor: pointer; }
-          .float-cart__shelf-container .shelf-item .quantity .btn-fav .iconNum {
-            font-size: 20px;
-            vertical-align: middle;
-            font-style: normal; }
-        .float-cart__shelf-container .shelf-item .quantity .btn-fav.fav {
-          color: #5cB85C; }
-        .float-cart__shelf-container .shelf-item .quantity .btn-fav.unfav {
-          color: #fff;
-          background-color: #5cB85C; }
   .float-cart__footer {
     box-sizing: border-box;
     padding: 5%;

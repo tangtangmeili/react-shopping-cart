@@ -254,6 +254,37 @@ footer {
 
             transition: background-color 0.2s;
         }
+
+        .btn-fav{
+            float: right;
+            width: 48px;
+            height: 25px;
+            display:inline-block;
+            vertical-align: middle;
+            border:1px solid;
+            border-radius: 10%;
+            -webkit-margin-start:0px;
+            .iconfont{
+                display: inline;
+                font-size: 26px;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+            .iconNum{
+                font-size:20px;
+                vertical-align: middle;
+                font-style: normal;
+
+            }
+
+        }
+        .btn-fav.fav{
+            color:#5cB85C;
+        }
+        .btn-fav.unfav{
+            color: #fff;
+            background-color:#5cB85C;
+        }
     }
 }
 
@@ -483,36 +514,6 @@ footer {
                     cursor: not-allowed;
                 }
 
-                .btn-fav{
-                    float: right;
-                    width: 48px;
-                    height: 25px;
-                    display:inline-block;
-                    vertical-align: middle;
-                    border:1px solid;
-                    border-radius: 10%;
-                    -webkit-margin-start:0px;
-                    .iconfont{
-                        display: inline;
-                        font-size: 26px;
-                        vertical-align: middle;
-                        cursor: pointer;
-                    }
-                    .iconNum{
-                        font-size:20px;
-                        vertical-align: middle;
-                        font-style: normal;
-
-                    }
-
-                }
-                .btn-fav.fav{
-                    color:#5cB85C;
-                }
-                .btn-fav.unfav{
-                    color: #fff;
-                    background-color:#5cB85C;
-                }
             }
           
         }
