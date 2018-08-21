@@ -21,6 +21,8 @@ friendly user experience with instant visual updates and scaleable code in ecomm
 - Products persist in floating cart even after page reloads
 - Responsive design for desktop, tablets and mobile
 - Product stoppers for free shipping
+- The quantity added to the cart
+- Add favorite
 
 #### Using
 - React
