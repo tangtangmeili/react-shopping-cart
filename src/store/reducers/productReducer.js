@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS } from '../actions/types';
+import { FETCH_PRODUCTS,FAVORITE } from '../actions/types';
 
 
 const initialState = {
@@ -11,6 +11,13 @@ export default function(state = initialState, action){
       return {
         ...state,
         items: action.payload
+      }
+    case FAVORITE:
+      console.log("state is",state);
+      console.log("hello",action.payload);
+      return{
+        ...state,
+        items:action.payload
       }
     default:
       return state;

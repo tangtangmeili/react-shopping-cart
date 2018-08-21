@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { fetchProducts } from '../../store/actions/productActions';
+import { fetchProducts,favorite } from '../../store/actions/productActions';
 import { addProduct } from '../../store/actions/floatCartActions';
 
 import Product from './Product';
@@ -19,7 +19,8 @@ class Shelf extends Component {
 
   componentWillMount() {
     const { filters, sort } = this.props;
-
+    console.log(this.props);
+    
     this.handleFetchProducts(filters, sort);
   }
 
@@ -43,13 +44,14 @@ class Shelf extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products} = this.props;
     
     const p = products.map(p => {
       return (
         <Product
           product={p}
           addProduct={this.props.addProduct}
+          handleClick={this.props.favorite}
           key={p.id}
         />
       );
@@ -87,4 +89,4 @@ const mapStateToProps = state => ({
   sort: state.sort.item,
 })
 
-export default connect(mapStateToProps, { fetchProducts, addProduct })(Shelf);
+export default connect(mapStateToProps, { fetchProducts, addProduct,favorite })(Shelf);

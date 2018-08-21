@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS } from './types';
+import { FETCH_PRODUCTS,FAVORITE } from './types';
 import axios from 'axios';
 
 
@@ -40,7 +40,7 @@ export const fetchProducts = (filters, sortBy, callback) => dispatch => {
         callback();
       }
 
-      return dispatch({
+     return dispatch({
         type: FETCH_PRODUCTS,
         payload: products
       });
@@ -50,4 +50,33 @@ export const fetchProducts = (filters, sortBy, callback) => dispatch => {
       console.log(err);
       throw new Error('Could not fetch products. Try again later.');
     });
+}
+
+export const favorite=(productId)=>dispatch=>{
+  if(!localStorage.getItem('favorite')){
+    new Promise((resolve,reject)=>{
+      axios.get(`http://localhost:8001/favorite/${productId}`).then(res=>{
+      
+        resolve(res.data);
+      })
+    }).then(res=>{
+      let {items}=res;
+      localStorage.setItem('favorite',JSON.stringify(items));
+      return dispatch({
+        type:FAVORITE,
+        payload:items
+      })
+    })
+  }
+  else{
+    let dataItems=JSON.parse(localStorage.getItem('favorite'));
+    let currentProduct=dataItems.items.filter(product=>product.id==productId);
+    currentProduct[0].favoiteNum=currentProduct[0].favoiteNum+1;
+    localStorage.setItem('favorite',JSON.stringify(dataItems));
+    return dispatch({
+      type:FAVORITE,
+      payload:dataItems.items
+    })
+  }
+ 
 }

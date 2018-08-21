@@ -31,7 +31,7 @@ const Product = (props) => {
   return (
     <div className="shelf-item" data-sku={product.sku}>
        <div className="btn-fav fav">
-              <i className="iconfont">&#xe654;</i>
+              <i className="iconfont" onClick={()=>props.handleClick(product.id)}>&#xe654;</i>
               <i className="iconNum">{product.favoiteNum}</i>
         </div>
       <Thumb
