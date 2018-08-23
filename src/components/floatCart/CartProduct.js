@@ -18,7 +18,6 @@ class CartProduct extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("今日頭條");
     this.setState({isToDisable:((this.props.product.quantity>1) ? false:true)})
   }
    
@@ -61,7 +60,6 @@ class CartProduct extends Component {
 
           </dl>
           
-         
         </div>
         <div className="shelf-item__price">
           <p>{`${product.currencyFormat}  ${util.formatPrice(product.price*product.quantity)}`}</p>
